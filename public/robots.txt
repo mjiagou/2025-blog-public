@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /write/
+
+Sitemap: https://yysuni.com/sitemap.xml

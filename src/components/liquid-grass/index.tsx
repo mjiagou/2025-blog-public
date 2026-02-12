@@ -11,16 +11,19 @@ const width = 210
 const height = 150
 
 export default function LiquidGrass() {
-	const bodyRef = useRef(document.body)
+	const bodyRef = useRef<HTMLElement | null>(null)
 	const [show, setShow] = useState(false)
 
 	useEffect(() => {
+		// Set body ref only on client
+		bodyRef.current = document.body
+		
 		setTimeout(() => {
 			setShow(true)
 		}, 1000)
 	}, [])
 
-	if (!show) return null
+	if (!show || typeof document === 'undefined') return null
 
 	return createPortal(
 		<motion.div

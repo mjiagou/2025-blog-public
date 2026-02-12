@@ -8,6 +8,9 @@
     "build": "next build",
     "start": "next start",
     "build:cf": "opennextjs-cloudflare build",
+    "prebuild:edgeone": "mkdir -p /tmp/edgeone-backup && cp next.config.ts next.config.backup.ts && cp next.config.edgeone.ts next.config.ts && (test -f src/app/robots.ts && mv src/app/robots.ts /tmp/edgeone-backup/ || true) && (test -f src/app/sitemap.ts && mv src/app/sitemap.ts /tmp/edgeone-backup/ || true) && (test -d src/app/write && mv src/app/write /tmp/edgeone-backup/ || true)",
+    "build:edgeone": "next build",
+    "postbuild:edgeone": "(test -d /tmp/edgeone-backup/write && mv /tmp/edgeone-backup/write src/app/ || true) && (test -f /tmp/edgeone- backup/robots.ts && mv /tmp/edgeone-backup/robots.ts src/app/ || true) && (test -f /tmp/edgeone-backup/sitemap.ts && mv /tmp/edgeone-backup/sitemap.ts src/app/ || true) && rm -rf /tmp/edgeone-backup && (test -f next.config.backup.ts && mv next.config.backup.ts next.config.ts || true)",
     "preview": "opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
