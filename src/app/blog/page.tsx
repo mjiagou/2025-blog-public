@@ -443,18 +443,18 @@ export default function BlogPage() {
 						</motion.div>
 					)
 				})}
-				{items.length > 0 && (
+				{items.length > 0 && siteContent.moreLink?.enabled && siteContent.moreLink?.url && (
 					<div className='text-center'>
 						<motion.a
 							initial={{ opacity: 0, scale: 0.6 }}
 							animate={{ opacity: 1, scale: 1 }}
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
-							href='https://juejin.cn/user/2427311675422382/posts'
+							href={siteContent.moreLink.url}
 							target='_blank'
 							className='card text-secondary static inline-flex items-center gap-2 rounded-xl px-4 py-2 text-xs'>
-							<JuejinSVG className='h-4 w-4' />
-							更多
+							{siteContent.moreLink.icon === 'juejin' && <JuejinSVG className='h-4 w-4' />}
+							{siteContent.moreLink.text || '更多'}
 						</motion.a>
 					</div>
 				)}

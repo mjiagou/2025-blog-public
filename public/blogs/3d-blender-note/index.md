@@ -23,11 +23,3 @@
 加上表情管理应该会更好些，需要研究一下怎么弄
 
 ## Demo
-
-<iframe
-	src='https://suni-3d.vercel.app/player-02'
-	style={{ border: 0 }}
-	allowfullscreen
-	width="100%"
-	height="600px"
-	loading='lazy'></iframe>

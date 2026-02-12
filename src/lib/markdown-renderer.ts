@@ -8,6 +8,16 @@ export interface MarkdownRenderResult {
 	toc: TocItem[]
 }
 
+// Utility to escape HTML to prevent XSS in manually constructed strings
+function escapeHtml(text: string): string {
+	return text
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;')
+		.replace(/"/g, '&quot;')
+		.replace(/'/g, '&#039;')
+}
+
 export function slugify(text: string): string {
 	return text
 		.toLowerCase()
@@ -67,7 +77,8 @@ export async function renderMarkdown(markdown: string): Promise<MarkdownRenderRe
 
 	renderer.heading = (token: Tokens.Heading) => {
 		const id = slugify(token.text || '')
-		return `<h${token.depth} id="${id}">${token.text}</h${token.depth}>`
+		const text = escapeHtml(token.text)
+		return `<h${token.depth} id="${id}">${text}</h${token.depth}>`
 	}
 
 	renderer.code = (token: Tokens.Code) => {

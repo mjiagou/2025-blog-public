@@ -71,6 +71,21 @@
 	"currentHatIndex": 3,
 	"hatFlipped": false,
 	"enableChristmas": false,
+	"ads": {
+		"enabled": true,
+		"positions": {
+			"header": false,
+			"sidebar": true,
+			"inArticle": true,
+			"footer": false
+		}
+	},
+	"moreLink": {
+		"enabled": true,
+		"text": "更多",
+		"url": "https://juejin.cn/user/2427311675422382/posts",
+		"icon": "juejin"
+	},
 	"beian": {
 		"text": "",
 		"link": ""
