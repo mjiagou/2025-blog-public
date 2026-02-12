@@ -38,10 +38,18 @@ export async function renderMarkdownServer(markdown: string): Promise<MarkdownRe
 				.replace(/&gt;/g, '>')
 				.replace(/&amp;/g, '&')
 			
+			// CRITICAL: Escape the content to prevent html-react-parser from treating
+			// code examples (like <canvas ref={...}>) as actual React components
+			// This fixes the "Refs cannot be used in Server Components" error
+			const escapedContent = content
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+			
 			codeBlocks.push({
 				id,
 				code,
-				preHtml: content
+				preHtml: escapedContent
 			})
 			// Return a custom tag that is valid HTML but easy to catch
 			return `<x-code-block id="${id}"></x-code-block>`
